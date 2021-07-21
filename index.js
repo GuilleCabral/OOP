@@ -15,7 +15,8 @@
 
 // Create a dog object with name and numLegs properties, and set them to a string and a number, respectively.
 let dog = {
-
+  name: 'Fido',
+  numLegs: 5
 };
 
 
@@ -36,7 +37,8 @@ let dog = {
         numLegs: 4
       };
       // Only change code below this line
-
+console.log(dog.name);
+console.log(dog.numLegs);
   //3.) Object Oriented Programming: Create a Method on an Object
 //   Objects can have a special type of property, called a method.
 
@@ -55,7 +57,7 @@ let dog = {
 let dog = {
     name: "Spot",
     numLegs: 4,
-
+  sayLegs: function() {"This dog has " + dog.numLegs + " legs"}
   };
 
   dog.sayLegs();
@@ -81,7 +83,7 @@ let dog = {
 let dog = {
     name: "Spot",
     numLegs: 4,
-    sayLegs: function() {return "This dog has " + dog.numLegs + " legs.";}
+    sayLegs: function() {return "This dog has " + this.numLegs + " legs.";}
   };
 
   dog.sayLegs();
@@ -104,7 +106,11 @@ let dog = {
 // Constructors define properties and behaviors instead of returning a value as other functions might.
 // Create a constructor, Dog, with properties name, color, and numLegs that are set to a string, a string, and a number, respectively.
 
-
+function Dog() = {
+  this.name= 'Guille';
+  this.color= 'yellow';
+  this.numLegs= 5;
+};
 
 
     //6.) Object Oriented Programming: Use a Constructor to Create Objects
@@ -135,7 +141,7 @@ function Dog() {
     this.numLegs = 4;
   }
   // Only change code below this line
-
+  let hound = new Dog();
 
 
     //7.)Object Oriented Programming: Extend Constructors to Receive Arguments
@@ -166,6 +172,8 @@ function Dog() {
       this.numLegs = 4;
     }
 
+    let terrier = new Dog("Guille", "blue");
+
     //8.)Object Oriented Programming: Verify an Object's Constructor with instanceof
 //     Anytime a constructor function creates a new object, that object is said to be an instance of its constructor. JavaScript gives a convenient way to verify this with the instanceof operator. instanceof allows you to compare an object to a constructor, returning true or false based on whether or not that object was created with the constructor. Here's an example:
 
@@ -191,8 +199,10 @@ function Dog() {
 function House(numBedrooms) {
     this.numBedrooms = numBedrooms;
   }
-
+let myHouse = new House(5);
+myHouse instanceof House;
   // Only change code below this line
+
     //9.)Object Oriented Programming: Understand Own Properties
 //     In the following example, the Bird constructor defines two properties: name and numLegs:
 
@@ -223,7 +233,11 @@ function Bird(name) {
   let canary = new Bird("Tweety");
   let ownProps = [];
   // Only change code below this line
-
+  for(let property in canary){
+    if(canary.hasOwnProperty(property)){
+      ownProps.push(property);
+    }
+  }
 
 
     //10.)Object Oriented Programming: Use Prototype Properties to Reduce Duplicate Code
@@ -245,7 +259,7 @@ function Dog(name) {
     this.name = name;
   }
 
-
+Dog.prototype.numLegs = 4;
 
   // Only change code above this line
   let beagle = new Dog("Snoopy");
@@ -290,10 +304,13 @@ function Dog(name) {
   let prototypeProps = [];
 
   // Only change code below this line
-
-
-
-
+for (let property in beagle){
+  if (Dog.hasOwnProperty(property)){
+    ownProps.push(property)
+  } else {
+    prototypeProps.push(property);
+  }
+}
 
     //12.)Object Oriented Programming: Understand the Constructor Property
 //     There is a special constructor property located on the object instances duck and beagle that were created in the previous challenges:
@@ -322,12 +339,13 @@ function Dog(name) {
 
   // Only change code below this line
   function joinDogFraternity(candidate) {
-
+    if(candidate.constructor === Dog){
+      return true;
+    } else {
+      return false;
+    }
   }
-
-
-
-
+ let beagle = new Dog();
 
     //13.)Object Oriented Programming: Change the Prototype to a New Object
     // Up until now you have been adding properties to the prototype individually:
@@ -360,7 +378,13 @@ function Dog(name) {
 
       Dog.prototype = {
         // Only change code below this line
-
+        numLegs: 4;
+        eat: function() {
+          console.log('yum yum');
+        }
+        describe: function() {
+          console.log('My name is dog')
+        }
       };
 
 
@@ -390,7 +414,7 @@ function Dog(name) {
 
       // Only change code below this line
       Dog.prototype = {
-
+        constructor: Dog,
         numLegs: 4,
         eat: function() {
           console.log("nom nom nom");
